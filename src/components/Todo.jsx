@@ -2,9 +2,9 @@ import React from "react";
 
 export const Todo = ({ todo, handleDelete }) => {
   return (
-    <li>
+    <li className="todo-item">
       <p>{todo.description}</p>
-      <button onClick={() => handleDelete(todo)}>
+      <button className="btn-icon" onClick={() => handleDelete(todo)}>
         <i className="fa fa-trash"></i>
       </button>
     </li>

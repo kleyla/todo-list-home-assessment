@@ -8,6 +8,8 @@ import { Todo } from "./components/Todo";
 import { Login } from "./components/Login";
 import { useError } from "./hooks/useError";
 
+import "./App.css";
+
 const App = () => {
   const portal =
     window.location.hostname === "localhost" ? "https://siasky.net" : undefined;
@@ -113,9 +115,17 @@ const App = () => {
   };
 
   const handleLogout = async () => {
-    await mySky.logout();
-    setIsLoggedIn(false);
-    setUserId("");
+    try {
+      setIsLoading(true);
+      await mySky.logout();
+      setIsLoggedIn(false);
+      setUserId("");
+      setPath("");
+      setTodos([]);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -140,19 +150,21 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       {isLoading ? (
-        <div>Loading...</div>
+        <div className="loader"></div>
       ) : (
-        <div>
+        <div className="container-app">
           {isLoggedIn ? (
             <>
-              <div>
+              <div className="header-info">
                 <div>
                   <h4>User ID:</h4>
                   <p>{userId}</p>
                 </div>
-                <button onClick={handleLogout}>logout</button>
+                <button className="secondary" onClick={handleLogout}>
+                  logout
+                </button>
               </div>
 
               <main>
@@ -162,14 +174,14 @@ const App = () => {
                   setPath={setPath}
                 />
 
-                <div>
+                <div className="two-columns">
                   <Form
                     handleSubmit={handleSubmit}
                     handleInput={handleInput}
                     todo={todo}
                   />
 
-                  <div>
+                  <div className="list">
                     <h3>To Do</h3>
                     <ul>
                       {todos.map((todo) => (
@@ -188,7 +200,7 @@ const App = () => {
             <Login handleLogin={handleLogin} />
           )}
           {error && (
-            <div>
+            <div className="card-error">
               <p>{error}</p>
             </div>
           )}

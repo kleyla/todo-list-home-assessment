@@ -2,9 +2,11 @@ import React from "react";
 
 export const Search = ({ handleSearch, path, setPath }) => {
   return (
-    <form onSubmit={handleSearch}>
-      <div>
-        <label htmlFor="path">Path</label>
+    <form onSubmit={handleSearch} className="form-inline">
+      <div className="mr-2">
+        <label htmlFor="path" className="mr-2">
+          Path
+        </label>
         <input
           type="text"
           name="path"
@@ -12,7 +14,9 @@ export const Search = ({ handleSearch, path, setPath }) => {
           onChange={(e) => setPath(e.target.value)}
         />
       </div>
-      <button type="submit">Search</button>
+      <button className="secondary" type="submit">
+        Search
+      </button>
     </form>
   );
 };
