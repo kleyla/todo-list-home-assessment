@@ -151,61 +151,62 @@ const App = () => {
 
   return (
     <div className="container">
-      {isLoading ? (
-        <div className="loader"></div>
-      ) : (
-        <div className="container-app">
-          {isLoggedIn ? (
-            <>
-              <div className="header-info">
-                <div>
-                  <h4>User ID:</h4>
-                  <p>{userId}</p>
-                </div>
-                <button className="secondary" onClick={handleLogout}>
-                  logout
-                </button>
+      <div className="container-app">
+        {isLoading && (
+          <div className="overlay">
+            <div className="loader"></div>
+          </div>
+        )}
+        {isLoggedIn ? (
+          <>
+            <div className="header-info">
+              <div>
+                <h4>User ID:</h4>
+                <p>{userId}</p>
               </div>
+              <button className="secondary" onClick={handleLogout}>
+                logout
+              </button>
+            </div>
 
-              <main>
-                <Search
-                  handleSearch={handleSearch}
-                  path={path}
-                  setPath={setPath}
+            <main>
+              <Search
+                handleSearch={handleSearch}
+                path={path}
+                setPath={setPath}
+              />
+
+              <div className="two-columns">
+                <Form
+                  handleSubmit={handleSubmit}
+                  handleInput={handleInput}
+                  todo={todo}
                 />
 
-                <div className="two-columns">
-                  <Form
-                    handleSubmit={handleSubmit}
-                    handleInput={handleInput}
-                    todo={todo}
-                  />
-
-                  <div className="list">
-                    <h3>To Do</h3>
-                    <ul>
-                      {todos.map((todo) => (
-                        <Todo
-                          key={todo.createdAt}
-                          todo={todo}
-                          handleDelete={handleDelete}
-                        />
-                      ))}
-                    </ul>
-                  </div>
+                <div className="list">
+                  <h3>To Do</h3>
+                  <ul>
+                    {todos.map((todo) => (
+                      <Todo
+                        key={todo.createdAt}
+                        todo={todo}
+                        handleDelete={handleDelete}
+                      />
+                    ))}
+                  </ul>
                 </div>
-              </main>
-            </>
-          ) : (
-            <Login handleLogin={handleLogin} />
-          )}
-          {error && (
-            <div className="card-error">
-              <p>{error}</p>
-            </div>
-          )}
-        </div>
-      )}
+              </div>
+            </main>
+          </>
+        ) : (
+          <Login handleLogin={handleLogin} />
+        )}
+        {error && (
+          <div className="card-error">
+            <p>{error}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
