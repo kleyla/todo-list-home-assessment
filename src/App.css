@@ -89,13 +89,28 @@ button {
 }
 
 button.primary {
-  background-color: var(--four);
+  background-color: var(--three);
   color: #fff;
+}
+button.primary:hover {
+  background-color: var(--four);
+}
+button.primary:active {
+  background-color: var(--two);
+  color: #000;
+  box-shadow: 3px 3px #000;
 }
 
 button.secondary {
-  background-color: var(--five);
+  background-color: var(--four);
   color: #fff;
+}
+button.secondary:hover {
+  background-color: var(--five);
+}
+button.secondary:active {
+  background-color: var(--three);
+  box-shadow: 3px 3px #000;
 }
 
 main {
